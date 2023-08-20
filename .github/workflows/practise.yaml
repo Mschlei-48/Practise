@@ -27,7 +27,7 @@ jobs:
       run: |
         echo "# Results" > report.md
         cat results.txt >> report.md
-        echo '![](./ConfusionMatrix.png)' >>report.md
+        echo '![](./ConfusionMatrix.png "Confusion Matrix")' >>report.md
         cml comment create report.md
 
 
