@@ -23,7 +23,7 @@ jobs:
         python File.py
     - name: Step2
       env:
-        REPO_TOKEN: {{secrets.GITHUB_TOKEN}}
+        REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         echo "# Results" > report.md
         cat results.txt >> report.md
