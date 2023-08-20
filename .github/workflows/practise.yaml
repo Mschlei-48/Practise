@@ -7,11 +7,37 @@ permissions:
   id-token: write
   contents: write
 jobs:
-  myjob:
+  job1:
     runs-on: ubuntu-latest
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     timeout-minutes: 120
-#What the above lines are saying is that, the name of the file is Mishi
-#The trigger is specified under on, which means the file must be triggered on the following actions
+    steps:
+    - uses: actions/checkout@v3
+    -uses: iterative/setup-cml@v1
+    -name: Step1
+      env:
+        REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        python File.py
+    -name: Step2
+      env:
+        REPO_TOKEN: {{secrets.GITHUB_TOKEN}}
+      run: |
+        echo "# Results" > report.md
+        cat results.txt >> report.md
+        echo '![](./ConfusionMatrix.png)' >>report.md
+        cml comment create report.md
+
+
+
+
+#What the above lines are saying is that, the name of the file is Mishi.
+#The trigger is specified under on, which means the file must be triggered on the following actions.
 #The triggers are push actions, that happen under the branch main.
-#Then you give permissions for writing
+#Then you give permissions for writing.
+#The steps are the steps that will be run as part of the job.
+#Note that under the steps attribute, there will be a lot of steps.
+#The first step is called Step1.
+
