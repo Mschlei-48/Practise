@@ -1,0 +1,17 @@
+name: Mishi
+on:
+  push:
+   branches:
+    - main
+permissions:
+  id-token: write
+  contents: write
+jobs:
+  myjob:
+    runs-on: ubuntu-latest
+    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+    timeout-minutes: 120
+#What the above lines are saying is that, the name of the file is Mishi
+#The trigger is specified under on, which means the file must be triggered on the following actions
+#The triggers are push actions, that happen under the branch main.
+#Then you give permissions for writing
